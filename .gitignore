@@ -1,3 +1,6 @@
+#firebase
+serviceAccount.json
+trips.json
 # Logs
 logs
 *.log
