@@ -27,13 +27,34 @@ connectMongo();
 
 /**
  * Get the quantity of documents into a collection.
- * @param {String} - query: the cityTarget to search into database
+ * @param {Object} - query: the cityTarget to search into database
  * @param {String} - db: database target
  * @param {String} - collection: collection target
  * @returns {Promise} - Promise with the result.
  */
 async function getCountByCity(db, collection, query){
   return await client.db(db).collection(collection).find(query).count();
+}
+
+/**
+ * Get all trips with pagination.
+ * @param {Obhect} - query: filters or sort?
+ * @param {String} - page: what page do you want to load? must start with "0"
+ * @param {String} - per_page: how many items per page
+ * @param {String} - db: database target
+ * @param {String} - collection: collection target
+ * @returns {Promise} - Promise with the result.
+ */
+function getTrips(db, collection, query, page, per_page, sortQuery){
+  return new Promise ( (resolve, reject) => {
+    client.db(db).collection(collection).find(query).sort(sortQuery).skip(page > 0 ? (page*per_page) : 0)
+     .limit(parseInt(per_page)).toArray( (err, res) => {
+        if(err){
+          return reject(err);
+        }
+        resolve(res);
+     });
+  } ) 
 }
 
 /**
@@ -90,6 +111,7 @@ module.exports = {
   updateTrip,
   getTrip,
   insertTrip,
+  getTrips
 }
 
 
