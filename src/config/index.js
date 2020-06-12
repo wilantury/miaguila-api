@@ -12,7 +12,9 @@ const config = {
   measurementId: process.env.MEASUREMENT_ID,
   //Server
   port: process.env.PORT,
-  env: process.env.NODE_ENV
+  env: process.env.NODE_ENV,
+  //mongodb Config
+  uri_mongo: process.env.URI_MONGO
 }
 
 
