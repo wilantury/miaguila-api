@@ -12,6 +12,7 @@ router.get('/qty_trips', getQtyTrips);
 router.get('/qty_trips/city', getQtyTripsByCity);
 router.get('/:id', getTripById);
 router.put('/status', updateStatusTrip);
+router.put('/drv_loc', updateDrvLocTrip);
 
 /**
  * API Endpoint to get how many trips are into collection "trips" of db.
@@ -58,7 +59,7 @@ async function getTripById(req, res, next){
 }
 
 /**
- * API Endpoint to update a trip
+ * API Endpoint to update the status of a trip
  * @method POST 
  * @param {Object} req - the request object
  * @returns {Object} - body
@@ -71,5 +72,18 @@ async function updateStatusTrip(req, res, next){
       response.error(req, res, err.message, 500, 'error network updating trip');
   }
 }
-
+/**
+ * API Endpoint to update the location of a trip
+ * @method POST 
+ * @param {Object} req - the request object
+ * @returns {Object} - body
+ */
+async function updateDrvLocTrip(req, res, next){  
+  try{
+      const resUpdateDrvLocTrip = await ControllerTrips.updateDrvLocTrip(req.body);
+      response.success(req, res, resUpdateDrvLocTrip, 200);
+  }catch(err){
+      response.error(req, res, err.message, 500, 'error network updating trip');
+  }
+}
 module.exports = router;
