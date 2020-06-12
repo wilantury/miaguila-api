@@ -10,6 +10,8 @@ const ControllerTrips = require('./controller');
 /**Router */
 router.get('/qty_trips', getQtyTrips);
 router.get('/qty_trips/city', getQtyTripsByCity);
+router.get('/:id', getTripById);
+router.put('/status', updateStatusTrip);
 
 /**
  * API Endpoint to get how many trips are into collection "trips" of db.
@@ -33,10 +35,40 @@ async function getQtyTrips(req, res, next){
  */
 async function getQtyTripsByCity(req, res, next){
   try{
-      const resGetQtyTripsByCity = await ControllerTrips.getQtyTripsByCity(req);
+      const resGetQtyTripsByCity = await ControllerTrips.getQtyTripsByCity(req.query);
       response.success(req, res, {quantity:resGetQtyTripsByCity}, 200);
   }catch(err){
       response.error(req, res, err.message, 500, 'error network getting QTY of trips by city');
+  }
+}
+
+/**
+ * API Endpoint to get one trip by id
+ * @method GET 
+ * @param {Object} req - the request object
+ * @returns {Object} - body
+ */
+async function getTripById(req, res, next){
+  try{
+      const resGetTripById = await ControllerTrips.getTripById(req.params);
+      response.success(req, res,resGetTripById, 200);
+  }catch(err){
+      response.error(req, res, err.message, 500, 'error network getting QTY of trips by city');
+  }
+}
+
+/**
+ * API Endpoint to update a trip
+ * @method POST 
+ * @param {Object} req - the request object
+ * @returns {Object} - body
+ */
+async function updateStatusTrip(req, res, next){  
+  try{
+      const resUpdateTrip = await ControllerTrips.updateStatusTrip(req.body);
+      response.success(req, res, resUpdateTrip, 200);
+  }catch(err){
+      response.error(req, res, err.message, 500, 'error network updating trip');
   }
 }
 
