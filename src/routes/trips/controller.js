@@ -37,14 +37,24 @@ const collection="trips";
   /**
    * Logic to get all trips, using pagination
    * @method GET 
-   * @param {Object} req.query - the query of request : page number
+   * @param {Object} req.query - the query of request
    * @returns {Object} response - trips
    */
   async function getTrips(getQuery){
-    const { page, per_page } = getQuery;
-    console.log(page, per_page);
-    //const query = {};
-    //return await store.getTrip(db,collection, query);
+    const { page, per_page, sort_date, city } = getQuery;
+    let query;
+    let sort;
+    if(city){
+      query = {city:{name:city}}
+    }
+    if (sort_date){
+      if(sort_date==='asc'){
+        sort = {createdAt:-1}
+      }else if(sort_date === 'desc'){
+        sort = {createdAt:1}
+      }
+    }
+    return await store.getTrips(db,collection, query, page, per_page, sort);
   }
   
   /**

@@ -61,7 +61,7 @@ async function getTripById(req, res, next){
 }
 
 /**
- * API Endpoint to get all trips using pagination
+ * API Endpoint to get all trips using pagination, receive params to sort it
  * @method GET 
  * @param {Object} req - the request object
  * @returns {Object} - body
