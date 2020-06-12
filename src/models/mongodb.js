@@ -74,11 +74,22 @@ async function updateTrip(db, collection, query, newValues){
   return await client.db(db).collection(collection).updateOne(query, newValues);
 }
 
+/**
+ * Create a new trip.
+ * @param {Object} - Values
+ * @param {String} - db: database target
+ * @param {String} - collection: collection target
+ * @returns {Promise} - Promise with the result.
+ */
+async function insertTrip(db, collection, data){
+  return await client.db(db).collection(collection).insertOne(data);
+}
 module.exports = {
   getCount,
   getCountByCity,
   updateTrip,
   getTrip,
+  insertTrip,
 }
 
 
