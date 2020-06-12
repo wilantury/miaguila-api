@@ -61,6 +61,22 @@ const collection="trips";
     return await store.updateTrip(db,collection, query,newStatus);
   }
 
+  /**
+   * Logic to create a new trip
+   * @method POST 
+   * @param {Object} req.body - the body of request
+   * @returns {Object} response - create accomplished
+   */
+  async function createTrip(body){
+    body.createdAt = new Date();
+    try {
+      const result = await store.insertTrip(db,collection, body);
+      return result.insertedId;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
   module.exports = {
     getQtyTrips,
@@ -68,4 +84,5 @@ const collection="trips";
     updateStatusTrip,
     getTripById,
     updateDrvLocTrip,
+    createTrip,
   }
