@@ -11,6 +11,7 @@ const ControllerTrips = require('./controller');
 router.get('/qty_trips', getQtyTrips);
 router.get('/qty_trips/city', getQtyTripsByCity);
 router.get('/:id', getTripById);
+router.get('/', getTripsPagination);
 router.put('/status', updateStatusTrip);
 router.put('/drv_loc', updateDrvLocTrip);
 router.post('/', createTrip);
@@ -54,6 +55,21 @@ async function getTripById(req, res, next){
   try{
       const resGetTripById = await ControllerTrips.getTripById(req.params);
       response.success(req, res,resGetTripById, 200);
+  }catch(err){
+      response.error(req, res, err.message, 500, 'error network getting QTY of trips by city');
+  }
+}
+
+/**
+ * API Endpoint to get all trips using pagination
+ * @method GET 
+ * @param {Object} req - the request object
+ * @returns {Object} - body
+ */
+async function getTripsPagination(req, res, next){
+  try{
+      const resGetTrips = await ControllerTrips.getTrips(req.query);
+      response.success(req, res,resGetTrips, 200);
   }catch(err){
       response.error(req, res, err.message, 500, 'error network getting QTY of trips by city');
   }

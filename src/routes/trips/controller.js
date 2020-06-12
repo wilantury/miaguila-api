@@ -24,7 +24,7 @@ const collection="trips";
     const query = {city:{name:getQuery.city}};
     return await store.getCountByCity(db,collection, query);
   }
-    /**
+  /**
    * Logic to get a trip by id
    * @method GET 
    * @param {Object} req.params - the body of request
@@ -34,6 +34,19 @@ const collection="trips";
     const query = {_id:ObjectID(params.id)};
     return await store.getTrip(db,collection, query);
   }
+  /**
+   * Logic to get all trips, using pagination
+   * @method GET 
+   * @param {Object} req.query - the query of request : page number
+   * @returns {Object} response - trips
+   */
+  async function getTrips(getQuery){
+    const { page, per_page } = getQuery;
+    console.log(page, per_page);
+    //const query = {};
+    //return await store.getTrip(db,collection, query);
+  }
+  
   /**
    * Logic to update the status of a trip
    * @method PUT 
@@ -85,4 +98,5 @@ const collection="trips";
     getTripById,
     updateDrvLocTrip,
     createTrip,
+    getTrips,
   }
