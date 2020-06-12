@@ -100,7 +100,6 @@ const collection="trips";
     }
   }
 
-
   module.exports = {
     getQtyTrips,
     getQtyTripsByCity,
