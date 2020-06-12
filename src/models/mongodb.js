@@ -27,6 +27,19 @@ connectMongo();
 
 /**
  * Get the quantity of documents into a collection.
+ * @param {String} - city: the cityTarget to search into database
+ * @param {String} - db: database target
+ * @param {String} - collection: collection target
+ * @returns {Promise} - Promise with the result.
+ */
+async function getCountByCity(db, collection, cityTarget){
+  return await client.db(db).collection(collection).find({city:{name:cityTarget}}).count();
+}
+
+/**
+ * Get the quantity of documents by key into a collection.
+ * @param {String} - db: database target
+ * @param {String} - collection: collection target
  * @returns {Promise} - Promise with the result.
  */
 async function getCount(db, collection){
@@ -35,6 +48,7 @@ async function getCount(db, collection){
 
 module.exports = {
   getCount,
+  getCountByCity,
 }
 
 
