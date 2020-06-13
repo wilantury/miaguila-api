@@ -5,15 +5,28 @@ const express = require('express');
 const router = express.Router();
 const response = require('../../responses/response');
 const ControllerTrips = require('./controller');
-
+const validationHandler = require('../../../utils/middlewares/validationHandler');
+const { mongoIdSchema, getTripsSchema, getSizeTripsCity,
+        updateStatusSchema, updateDrvLocSchema
+      } = require('../../../utils/schemas/trips');
 
 /**Router */
 router.get('/qty_trips', getQtyTrips);
-router.get('/qty_trips/city', getQtyTripsByCity);
-router.get('/:id', getTripById);
-router.get('/', getTripsPagination);
-router.put('/status', updateStatusTrip);
-router.put('/drv_loc', updateDrvLocTrip);
+router.get('/qty_trips/city', 
+        validationHandler(getSizeTripsCity,'query'),
+        getQtyTripsByCity);
+router.get('/:id', 
+        validationHandler(mongoIdSchema,'params'),
+        getTripById);
+router.get('/', 
+        validationHandler(getTripsSchema,'query'),
+        getTripsPagination);
+router.put('/status', 
+        validationHandler(updateStatusSchema),
+        updateStatusTrip);
+router.put('/drv_loc', 
+        validationHandler(updateDrvLocSchema),
+        updateDrvLocTrip);
 router.post('/', createTrip);
 
 /**
@@ -56,7 +69,7 @@ async function getTripById(req, res, next){
       const resGetTripById = await ControllerTrips.getTripById(req.params);
       response.success(req, res,resGetTripById, 200);
   }catch(err){
-      response.error(req, res, err.message, 500, 'error network getting QTY of trips by city');
+      response.error(req, res, err.message, 500, 'error network getting trip by Id');
   }
 }
 
