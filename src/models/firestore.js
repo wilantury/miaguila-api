@@ -7,6 +7,4 @@ admin.initializeApp({
 
 let db = admin.firestore();
 
-function getCollection(collection){
-  
-}
+//Code here de implementation of CRUD --> next challenge

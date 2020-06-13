@@ -38,8 +38,8 @@ async function getCountByCity(db, collection, query){
 
 /**
  * Get all trips with pagination.
- * @param {Obhect} - query: filters or sort?
- * @param {String} - page: what page do you want to load? must start with "0"
+ * @param {Object} - query: filters and/or sort?
+ * @param {String} - page: what page do you want to load? it must start with "0" for first page
  * @param {String} - per_page: how many items per page
  * @param {String} - db: database target
  * @param {String} - collection: collection target
