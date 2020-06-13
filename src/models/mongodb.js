@@ -19,8 +19,8 @@ async function connectMongo(){
     await client.connect();
     console.log("DB connected")
   } catch (error) {
-    console.error(e);
-    throw e;
+    console.error("DB has not been connected yet, please check the database credentials.")
+    return new Error("Throubles to connect to Mongo");
   }
 }
 connectMongo();
