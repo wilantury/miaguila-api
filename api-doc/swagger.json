@@ -1,0 +1,767 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is an API that allow to create, update and fetch trips from a mongo database",
+    "version": "0.1.0",
+    "title": "miaguila API"
+  },
+  "host": "miaguila-host.com",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Trips",
+      "description": "Everything about trips"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/trips": {
+      "post": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Add a new trip",
+        "description": "create  a new trip",
+        "operationId": "InsertTrip",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Trip object that needs to be added at the DB",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createTrip"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "trip created"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Fetch trips from DB, using pagination, filters and sort",
+        "description": "You will be able to get trips using filter by city, sorting by date(asc, desc) and pagination the output",
+        "operationId": "getTrips",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "type": "string",
+            "description": "city"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string",
+            "description": "page number"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "type": "string",
+            "description": "how many trips for each page"
+          },
+          {
+            "name": "sort_date",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "description": "Sort order:\n * asc - Ascendent.\n * desc - Descendent.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Seacrh done-> Array of Trips Objects",
+            "schema": {
+              "$ref": "#/definitions/responseGetTrips"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/trips/qty_trips": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Get the collection size",
+        "description": "You can know the size of whole Trip Collection",
+        "operationId": "getTripSize",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "get the total of trips into collection",
+            "schema": {
+              "$ref": "#/definitions/GetCollectionSize"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/trips/qty_trips/city": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "type": "string",
+            "description": "city filter"
+          }
+        ],
+        "summary": "Get the quantity of trips that match with a city",
+        "description": "You can know how many trips have been taken in a city",
+        "operationId": "getTripCitySize",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "done",
+            "schema": {
+              "$ref": "#/definitions/responseGetTripsCitySize"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/trips/{id}": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of trip",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "summary": "Get a trip by ID",
+        "description": "Return a Trip that match with an ID",
+        "operationId": "getTripById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "get a Trip-> done",
+            "schema": {
+              "$ref": "#/definitions/responseGetTrip"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/trips/status": {
+      "put": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "update the Status of a trip",
+        "description": "You will be able to change the status of a Trip",
+        "operationId": "updateStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Information of new status and ID of Trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateStatusTrip"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Trip updated"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/trips/drv_loc": {
+      "put": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "update the Status of a trip",
+        "description": "You will be able to change the status of a Trip",
+        "operationId": "updateDrv_loc",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Information of new status and ID of Trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateDrvLocation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Trip updated"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "createTrip": {
+      "type": "object",
+      "required": [
+        "status",
+        "start",
+        "city",
+        "Passenger",
+        "driver",
+        "car",
+        "check_code",
+        "createdAt",
+        "price",
+        "driver_location"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "onWay"
+        },
+        "start": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "example": ""
+            },
+            "pickup_address": {
+              "type": "string",
+              "example": "cra 9, Bogotá, Colombia"
+            },
+            "pickup_location": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Point"
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "example": [
+                    -74.0816191,
+                    4.7519795
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "city": {
+          "type": "string",
+          "example": "Bogotá"
+        },
+        "Country": {
+          "type": "string",
+          "example": "Colombia"
+        },
+        "passenger": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "example": "Pablo Camilo"
+            },
+            "last_name": {
+              "type": "string",
+              "example": "Amirs torres"
+            }
+          }
+        },
+        "driver": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "example": "Evenlio"
+            },
+            "last_name": {
+              "type": "string",
+              "example": "Vidal Lopez"
+            }
+          }
+        },
+        "car": {
+          "type": "object",
+          "properties": {
+            "plate": {
+              "type": "string",
+              "example": "SYM059"
+            }
+          }
+        },
+        "check_code": {
+          "type": "string",
+          "example": "69"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": ""
+        },
+        "price": {
+          "type": "integer",
+          "example": 9600
+        },
+        "driver_location": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "Point"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "example": [
+                -74.0816191,
+                4.7519795
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responseGetTrips": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": false
+        },
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "5ee3ae1a072f8649554cd725"
+              },
+              "status": {
+                "type": "string",
+                "example": "onWay"
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "pickup_address": {
+                    "type": "string",
+                    "example": "cra 9, Bogotá, Colombia"
+                  },
+                  "pickup_location": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "example": "Point"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "example": [
+                          -74.0816191,
+                          4.7519795
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "city": {
+                "type": "string",
+                "example": "Bogotá"
+              },
+              "Country": {
+                "type": "string",
+                "example": "Colombia"
+              },
+              "passenger": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "Pablo Camilo"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "Amirs torres"
+                  }
+                }
+              },
+              "driver": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "Evenlio"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "Vidal Lopez"
+                  }
+                }
+              },
+              "car": {
+                "type": "object",
+                "properties": {
+                  "plate": {
+                    "type": "string",
+                    "example": "SYM059"
+                  }
+                }
+              },
+              "check_code": {
+                "type": "string",
+                "example": "69"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": ""
+              },
+              "price": {
+                "type": "integer",
+                "example": 9600
+              },
+              "driver_location": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "Point"
+                  },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "example": [
+                      -74.0816191,
+                      4.7519795
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetCollectionSize": {
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": false
+        },
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "quantity": {
+              "type": "integer",
+              "example": 593
+            }
+          }
+        }
+      }
+    },
+    "responseGetTripsCitySize": {
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": false
+        },
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "quantity": {
+              "type": "integer",
+              "example": 498
+            }
+          }
+        }
+      }
+    },
+    "responseGetTrip": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": false
+        },
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "5ee3ae1a072f8649554cd725"
+              },
+              "status": {
+                "type": "string",
+                "example": "onWay"
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "pickup_address": {
+                    "type": "string",
+                    "example": "cra 9, Bogotá, Colombia"
+                  },
+                  "pickup_location": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "example": "Point"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "example": [
+                          -74.0816191,
+                          4.7519795
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "city": {
+                "type": "string",
+                "example": "Bogotá"
+              },
+              "Country": {
+                "type": "string",
+                "example": "Colombia"
+              },
+              "passenger": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "Pablo Camilo"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "Amirs torres"
+                  }
+                }
+              },
+              "driver": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "Evenlio"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "Vidal Lopez"
+                  }
+                }
+              },
+              "car": {
+                "type": "object",
+                "properties": {
+                  "plate": {
+                    "type": "string",
+                    "example": "SYM059"
+                  }
+                }
+              },
+              "check_code": {
+                "type": "string",
+                "example": "69"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": ""
+              },
+              "price": {
+                "type": "integer",
+                "example": 9600
+              },
+              "driver_location": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "Point"
+                  },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "example": [
+                      -74.0816191,
+                      4.7519795
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "updateStatusTrip": {
+      "type": "object",
+      "required": [
+        "_id",
+        "status"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5ee3ae1a072f8649554cd725"
+        },
+        "status": {
+          "type": "string",
+          "example": "near"
+        }
+      }
+    },
+    "updateDrvLocation": {
+      "type": "object",
+      "required": [
+        "_id",
+        "long",
+        "lat"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5ee3ae1a072f8649554cd725"
+        },
+        "type": {
+          "type": "string",
+          "example": "Point"
+        },
+        "long": {
+          "type": "string",
+          "example": "-74.069978"
+        },
+        "lat": {
+          "type": "string",
+          "example": "4.670767"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "github repository",
+    "url": "https://github.com/wilantury/miaguila-api"
+  }
+}

@@ -84,7 +84,7 @@ async function getTripsPagination(req, res, next){
 async function updateStatusTrip(req, res, next){  
   try{
       const resUpdateTrip = await ControllerTrips.updateStatusTrip(req.body);
-      response.success(req, res, resUpdateTrip, 200);
+      response.success(req, res, resUpdateTrip, 201);
   }catch(err){
       response.error(req, res, err.message, 500, 'error network updating status trip');
   }
@@ -98,7 +98,7 @@ async function updateStatusTrip(req, res, next){
 async function updateDrvLocTrip(req, res, next){  
   try{
       const resUpdateDrvLocTrip = await ControllerTrips.updateDrvLocTrip(req.body);
-      response.success(req, res, resUpdateDrvLocTrip, 200);
+      response.success(req, res, resUpdateDrvLocTrip, 201);
   }catch(err){
       response.error(req, res, err.message, 500, 'error network updating driver location trip');
   }
@@ -113,7 +113,7 @@ async function updateDrvLocTrip(req, res, next){
 async function createTrip(req, res, next){  
   try{
       const resCreateTrip = await ControllerTrips.createTrip(req.body);
-      response.success(req, res, {id:resCreateTrip}, 200);
+      response.success(req, res, {id:resCreateTrip}, 201);
   }catch(err){
       response.error(req, res, err.message, 500, 'error network updating trip');
   }

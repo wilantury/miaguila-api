@@ -1,5 +1,7 @@
 #firebase
 serviceAccount.json
+#yaml
+swagger.yaml
 trips.json
 # Logs
 logs

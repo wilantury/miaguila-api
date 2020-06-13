@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "40eab7de-880f-4986-9995-7e296b226203",
+		"name": "miaguila-api",
+		"description": "miaguila-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get collection quantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/qty_trips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"qty_trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a trip by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/qty_trips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"qty_trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get collection quantity by city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/qty_trips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"qty_trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all trips with pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/qty_trips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"qty_trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update status od a trip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update  driverLocation of a trip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new Trip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "374776d2-2aae-4155-a345-360ef8b18380",
+			"key": "port",
+			"value": "3000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
