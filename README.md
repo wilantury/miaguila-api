@@ -6,6 +6,10 @@ This API Rest was developed using JavaScript, Node.js and Mongo DB. This API is 
 - Add tasks into kanban board, and then convert these tasks in issues.
 - Create a Milestone to track the tasks. It needs to has a deadline.
 - Create a Branch for each feature, then push it to repository.
+
+#### Backend architecture
+Network layer (Endpoints - Routes - middlewares) | Controller Layer (Logic)| Store (DB model) | Mongo DB 
+------------ | ------------- | ------------- |-----------------
 #### Resources  
 - Schema (JSON) to execute request using Postman.
 - API documentation.
