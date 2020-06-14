@@ -19,7 +19,6 @@ This API Rest was developed using JavaScript, Node.js and Mongo DB. This API is 
 #### Backend architecture
 
 Network layer (Endpoints - Routes - middlewares) | Security Layer (Not implemented) |Controller Layer (Logic)| Services | Store (DB model) | Mongo DB
-
 ------------ | ------------- | ------------- |----- | ----------------- | -------
 
 #### Resources
