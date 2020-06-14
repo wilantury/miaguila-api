@@ -7,7 +7,67 @@
 	},
 	"item": [
 		{
-			"name": "get collection quantity",
+			"name": "update  driverLocation of a trip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update status of a trip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/trips/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"trips",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a trip by id",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -28,7 +88,7 @@
 			"response": []
 		},
 		{
-			"name": "get a trip by id",
+			"name": "get collection quantity",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -91,66 +151,6 @@
 			"response": []
 		},
 		{
-			"name": "update status od a trip",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:{{port}}/api/trips/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"api",
-						"trips",
-						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update  driverLocation of a trip",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"_id\":\"5ee3ae1a072f8649554cd725\",\n\t\"status\":\"started\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:{{port}}/api/trips/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"api",
-						"trips",
-						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Create a new Trip",
 			"request": {
 				"method": "PUT",
@@ -183,7 +183,7 @@
 	],
 	"variable": [
 		{
-			"id": "374776d2-2aae-4155-a345-360ef8b18380",
+			"id": "2f592b7c-4959-46da-8512-9b77c4356239",
 			"key": "port",
 			"value": "3000",
 			"type": "string"

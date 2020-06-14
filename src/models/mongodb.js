@@ -8,7 +8,12 @@ const config = require('../config/index');
 /**
  * Fetch the environment variables to connect to a data base Mongo.
  */
-const uri = config.uri_mongo;
+let uri;
+if(config.env === 'development'){
+  uri = config.uri_mongo;
+}else{
+  uri = config.uri_mongo_atlas;
+}
 
 const client = new MongoClient(uri);
 /**
