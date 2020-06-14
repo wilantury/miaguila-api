@@ -14,8 +14,9 @@ const config = {
   port: process.env.PORT,
   env: process.env.NODE_ENV,
   //mongodb Config
-  uri_mongo: process.env.URI_MONGO
+  uri_mongo: process.env.URI_MONGO,
+  //mongo_atlas Config
+  uri_mongo_atlas: process.env.URI_MONGO_ATLAS,
 }
-
 
 module.exports = config;
