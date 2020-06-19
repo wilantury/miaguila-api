@@ -50,16 +50,10 @@ async function getCountByCity(db, collection, query){
  * @param {String} - collection: collection target
  * @returns {Promise} - Promise with the result.
  */
-function getTrips(db, collection, query, page, per_page, sortQuery){
-  return new Promise ( (resolve, reject) => {
-    client.db(db).collection(collection).find(query).sort(sortQuery).skip(page > 0 ? (page*per_page) : 0)
-     .limit(parseInt(per_page)).toArray( (err, res) => {
-        if(err){
-          return reject(err);
-        }
-        resolve(res);
-     });
-  } ) 
+async function getTrips(db, collection, query, page, per_page, sortQuery){
+  return await client.db(db).collection(collection).find(query)
+  .sort(sortQuery).skip(page > 0 ? (page*per_page) : 0)
+  .limit(parseInt(per_page)).toArray()
 }
 
 /**
@@ -78,15 +72,8 @@ async function getCount(db, collection){
  * @param {Object} - body with id
  * @returns {Promise} - Promise with the result.
  */
-function getTrip(db, collection, query){
-  return new Promise( (resolve, reject) => {
-    client.db(db).collection(collection).find(query).toArray((err, res) => {
-      if(err){
-        return reject(err);
-      }
-       resolve(res);
-    });
-  })
+async function getTrip(db, collection, query){
+  return await client.db(db).collection(collection).find(query).toArray()
 }
 /**
  * Update a trip of collection.
